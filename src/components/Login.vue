@@ -2,8 +2,11 @@
 import useVuelidate from "@vuelidate/core";
 import { email, required } from "@vuelidate/validators";
 import { reactive, ref, toRefs } from "vue";
+import { useAuthStore } from "../store/authStore";
+import { useRouter } from "vue-router";
 
-// defineProps<{ msg?: string }>()
+const authStore = useAuthStore();
+const router = useRouter();
 const isLoading = ref(false);
 let $externalResults = reactive({});
 const loginFrom = reactive({
@@ -25,7 +28,7 @@ const onLogin = async () => {
   if (!formValidate.value.$invalid) {
     try {
       isLoading.value = true;
-      const response = (await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,10 +37,14 @@ const onLogin = async () => {
           email: loginFrom.email,
           password: loginFrom.password,
         }),
-      }));
+      });
+      const data = await response.json();
+      console.log("Response:", data.user);
+      authStore.setUser(data.user);
+      authStore.setAccessToken(data.accessToken);
       isLoading.value = false;
 
-      // await router.push({ name: "register.submitted" });
+      await router.push({ name: "Tasks" });
     } catch (err) {
       isLoading.value = false;
       if (err instanceof Error) {
