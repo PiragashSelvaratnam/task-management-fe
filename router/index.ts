@@ -19,8 +19,8 @@ const router = createRouter({
 
 // Add navigation guard for authentication
 
-router.beforeEach((to, from, next) => {
-  // Implement authentication logic here
-});
+// router.beforeEach((to, from, next) => {
+//   // Implement authentication logic here
+// });
 
 export default router;
