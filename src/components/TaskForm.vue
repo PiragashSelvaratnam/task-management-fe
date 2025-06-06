@@ -12,7 +12,5 @@ const count = reactive({
 </template>
 
 <style scoped>
-button {
-  font-weight: bold;
-}
+
 </style>

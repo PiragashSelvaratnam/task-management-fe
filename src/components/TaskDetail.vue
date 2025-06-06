@@ -7,7 +7,5 @@ import { ref } from 'vue'
 </template>
 
 <style scoped>
-button {
-  font-weight: bold;
-}
+
 </style>
