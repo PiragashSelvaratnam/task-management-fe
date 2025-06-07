@@ -1,9 +1,3 @@
-declare module '*.vue' {
-  import { DefineComponent } from 'vue';
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
-}
-
 // // This can be directly added to any of your `.ts` files like `router.ts`
 // // It can also be added to a `.d.ts` file. Make sure it's included in
 // // project's tsconfig.json "files"

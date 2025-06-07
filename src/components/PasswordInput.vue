@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 import { computed } from "vue";
-const { placeholder, label, name, type } = defineProps({
+const { placeholder, label, name } = defineProps({
   placeholder: {
     type: String,
     default: null,
@@ -11,7 +11,6 @@ const { placeholder, label, name, type } = defineProps({
     type: String,
     required: true,
   },
-  type: String,
 });
 
 const {
@@ -19,28 +18,17 @@ const {
   value: inputValue,
   handleBlur,
   errorMessage,
-  meta,
 } = useField(computed(() => name));
-
-// const emit = defineEmits<{
-//   (e: "update:modelValue", value: string): void;
-//   (e: "blur"): void;
-// }>();
-
-// const onInput = (event: Event) => {
-//   emit("update:modelValue", (event.target as HTMLInputElement).value);
-// };
 </script>
 <template>
-  <div
-    class="w-full flex h-20 flex-col"
-    :class="{ 'mb-4': errorMessage, }"
-  >
+  <div class="w-full flex h-20 flex-col" :class="{ 'mb-4': errorMessage }">
     <label class="mb-1 text-sm text-gray-700">{{ label }}</label>
     <input
+      :name="name"
+      autocomplete="current-password"
       class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
       :value="inputValue"
-      :type="type || 'text'"
+      type="password"
       :placeholder="placeholder"
       @input="handleChange"
       @blur="handleBlur"

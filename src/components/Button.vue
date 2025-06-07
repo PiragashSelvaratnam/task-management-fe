@@ -11,7 +11,6 @@ const emits = defineEmits(["handleClick"]);
 
 <template>
   <div class="w-full flex h-10">
-    {{ disabled }}
     <button
       :disabled="disabled"
       @click="emits('handleClick')"
